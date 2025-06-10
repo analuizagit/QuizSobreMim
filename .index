@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Simples</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    .quiz-container {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .question {
+      display: none;
+      margin-bottom: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .question.active {
+      display: block;
+    }
+
+    .question.final {
+      margin-bottom: 30px;
+    }
+
+    .question h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 50px;
+      border: 2px solid #ccc;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .options input[type="radio"] {
+      display: none;
+    }
+    
+    .correct {
+      background-color: #c8f7c5; /* verde claro */
+      border: 2px solid #2ecc71;
+    }
+    
+    .incorrect {
+      background-color: #f8c6c6; /* vermelho claro */
+      border: 2px solid #e74c3c;
+    }
+    
+    .selected {
+      outline: 2px solid #3498db;
+    }
+
+    #result {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="result"></div>
+    <form id="quizForm">
+      <div class="question" data-answer="2">
+        <h3>1. Qual a minha cor favorita?</h3>
+        <div class="options">
+        <label><input type="radio" name="q1" value="0"> <img src="imagens/amarelo.png" width="50"> Amarelo</label>
+        <label><input type="radio" name="q1" value="1"> <img src="imagens/roxo.png" width="50"> Roxo</label>
+        <label><input type="radio" name="q1" value="2"> <img src="imagens/verde.png" width="50"> Verde</label>
+        <label><input type="radio" name="q1" value="3"> <img src="imagens/azul.png" width="50"> Azul</label>
+        <label><input type="radio" name="q1" value="4"> <img src="imagens/cinza.png" width="50"> Cinza</label>
+      </div>
+      <div class="question" data-answer="2">
+        <h3>2. Gosto de todos esses jogos, mas o favorito é:</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="0"> <img src="imagens/genshin.png" width="50"> Gensin Impact porque é possível explorar um mundo com uma natureza bonita de forma livre que se assemelha a vida real. Me ajuda a aliviar a ansiedade observando os detalhes da natureza e ajuda com o hiperfoco de planejar tudo.</label>
+          <label><input type="radio" name="q2" value="1"> <img src="imagens/valley.png" width="50"> Stardew Vallew porque me permite cuidar de uma fazenda de uma forma fofa e relaxante com o gráfico pixelado que adoro. Me ajuda a organizar pensamentos e aprendi BASTANTE sobre rotinas e a importância de tradições.</label>
+          <label><input type="radio" name="q2" value="2"> <img src="imagens/delta.png" width="50"> Undertale/Deltarune porque mudou meu jeito de pensar sobre pensar fora dos padrões da programação.</label>
+          <label><input type="radio" name="q2" value="3"> <img src="imagens/prince.png" width="50"> Príncipe da Persia: Areias do Tempo; Porquê é tipo os jogos da Larah Croft só que no deserto e com LÂMINAS. Fez parte da minha infância e me inspirou a querer aprender sobre tecnologia e cultura.</label>
+          <label><input type="radio" name="q2" value="4"> <img src="imagens/roug.png" width="50"> Rougue soul 1 ou "Alma Rebelde" 1 porque era muito divertido brincar de Robin Hood, fazer parkour e conquistar as mocinhas. O jogo que eu mais jogava na infância, servia como abrigo para quando eu estava me sentindo triste e sozinha.</label>
+        </div>
+      </div>
+
+      <div class="question" data-answer="0">
+        <h3>3. Se pokemóns existissem, qual seria minha profissão?</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="0"><img src="imagens/treinador.jpg" width="50"> Treinador comum, aquele que treina os animais como se fosse adestrador de cães.</label>
+          <label><input type="radio" name="q3" value="1"><img src="imagens/treinador2.jpg" width="50"> Treinador competitivo, no universo de pokémon, é como se os bichos fossem atletas, então eu seria uma atleta junto com meu animal.</label>
+          <label><input type="radio" name="q3" value="2"><img src="imagens/enfermeira.png" width="50"> Enfermeira Joy. É tipo veterinária. </label>
+          <label><input type="radio" name="q3" value="3"><img src="imagens/professora.jpg" width="50"> Professor Pokemón. Trabalha com pesquisa, tecnologia ou atua com pokemóns seus ou de outras pessoas, e pode ensinar nas escolas ou universidades também.</label>
+          <label><input type="radio" name="q3" value="4"><img src="imagens/pet.jpg" width="50"> Trabalhar com outra área que não envolve pokemón, mas poderia ter pokemóns como animais de estimação.</label>
+        </div>
+
+      <div class="question" data-answer="1">
+        <h3>3. Qual meu filme musical favorito?</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="0"><img src="imagens/rei.png" width="50"> Rei do Show</label>
+          <label><input type="radio" name="q3" value="1"><img src="imagens/sapo.jpg" width="50"> Princesa e o Sapo</label>
+          <label><input type="radio" name="q3" value="2"><img src="imagens/teen.png" width="50"> Teen Beach Movie ou Filme Jovem de Praia</label>
+          <label><input type="radio" name="q3" value="3"><img src="imagens/mogli.jpg" width="50"> Mogli Live action - Junglebook</label>
+          <label><input type="radio" name="q3" value="4"><img src="imagens/Wonka.png" width="50"> Wonka</label>
+        </div>
+
+      <div class="question" data-answer="0">
+        <h3>3. Qual meu desenho favorito?</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="0"><img src="imagens/roug.png" width="50"> Elefante</label>
+          <label><input type="radio" name="q3" value="1"><img src="imagens/roug.png" width="50"> Hipopótamo</label>
+          <label><input type="radio" name="q3" value="2"><img src="imagens/roug.png" width="50"> Girafa</label>
+          <label><input type="radio" name="q3" value="3"><img src="imagens/roug.png" width="50"> Urso</label>
+          <label><input type="radio" name="q3" value="4"><img src="imagens/roug.png" width="50"> Rinoceronte</label>
+        </div>
+
+     <div class="question" data-answer="0">
+            <h3>3. Me conhecendo, qual desse eu chorei por dias pensando sobre?</h3>
+            <div class="options">
+              <label><input type="radio" name="q3" value="0"><img src="imagens/roug.png" width="50"> Elefante</label>
+              <label><input type="radio" name="q3" value="1"><img src="imagens/roug.png" width="50"> Hipopótamo</label>
+              <label><input type="radio" name="q3" value="2"><img src="imagens/roug.png" width="50"> Girafa</label>
+              <label><input type="radio" name="q3" value="3"><img src="imagens/roug.png" width="50"> Urso</label>
+              <label><input type="radio" name="q3" value="4"><img src="imagens/roug.png" width="50"> Rinoceronte</label>
+            </div>
+
+     <div class="question" data-answer="0">
+          <h3>3. Me conhecendo, qual dessas eu NÃO usaria?</h3>
+          <div class="options">
+            <label><input type="radio" name="q3" value="0"><img src="imagens/roug.png" width="50"> 1</label>
+            <label><input type="radio" name="q3" value="1"><img src="imagens/roug.png" width="50"> 2</label>
+            <label><input type="radio" name="q3" value="2"><img src="imagens/roug.png" width="50"> 3</label>
+            <label><input type="radio" name="q3" value="3"><img src="imagens/roug.png" width="50"> 4</label>
+            <label><input type="radio" name="q3" value="4"><img src="imagens/roug.png" width="50"> 5</label>
+          </div>
+  
+    <div class="question" data-answer="0">
+            <h3>3. Me conhecendo, qual dessas eu me sinto confortável?</h3>
+            <div class="options">
+              <label><input type="radio" name="q3" value="0"><img src="imagens/roug.png" width="50"> Elefante</label>
+              <label><input type="radio" name="q3" value="1"><img src="imagens/roug.png" width="50"> Hipopótamo</label>
+              <label><input type="radio" name="q3" value="2"><img src="imagens/roug.png" width="50"> Girafa</label>
+              <label><input type="radio" name="q3" value="3"><img src="imagens/roug.png" width="50"> Urso</label>
+              <label><input type="radio" name="q3" value="4"><img src="imagens/roug.png" width="50"> Rinoceronte</label>
+            </div>
+
+      </div>
+    </form>
+    <button id="nextBtn">Próxima</button>
+    <div id="result" style="display:none;"></div>
+  </div>
+  <script>
+    function mostrarResultado() {
+    let corretas = 0;
+    let resumo = "<h3>Resultado:</h3><ol>";
+  
+    perguntas.forEach((pergunta, i) => {
+      const correta = pergunta.getAttribute('data-answer');
+      const labels = pergunta.querySelectorAll('label');
+  
+      labels.forEach(label => {
+        const input = label.querySelector('input');
+        label.classList.remove('correct', 'incorrect', 'selected');
+  
+        if (input.value === correta) {
+          label.classList.add('correct'); // Gabarito
+        }
+  
+        if (respostasSelecionadas[i] === input.value && input.value !== correta) {
+          label.classList.add('incorrect'); // Erro do usuário
+        }
+  
+        input.disabled = true; // Impede mudar depois de finalizar
+      });
+  
+      // Adiciona ao resumo textual
+      const textoEscolhido = pergunta.querySelector(`input[value="${respostasSelecionadas[i]}"]`)?.parentElement.textContent.trim();
+      const foiCorreta = respostasSelecionadas[i] === correta;
+      if (foiCorreta) corretas++;
+  
+      resumo += `<li>Questão ${i + 1}: ${textoEscolhido} ${foiCorreta ? "✅" : "❌"}</li>`;
+    });
+  
+    resumo += `</ol><p>Você acertou <strong>${corretas}</strong> de <strong>${perguntas.length}</strong> perguntas!</p>`;
+    resultado.innerHTML = resumo;
+    resultado.style.display = "block";
+    btn.style.display = "none";
+  }
+  </script>
+</body>
+</html>
